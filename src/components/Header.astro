@@ -1,0 +1,73 @@
+<header>
+  <div class="container">
+    <h1>JS to TS</h1>
+    <p class="tagline">A quick guide for JavaScript developers</p>
+    <nav>
+      <a href="/">Home</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  header {
+    background-color: #3178c6;
+    color: white;
+    padding: 1rem 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+  }
+
+  .tagline {
+    margin: 0 0 0 1rem;
+    font-size: 1rem;
+    opacity: 0.9;
+  }
+
+  nav {
+    margin-left: auto;
+  }
+
+  nav a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+  }
+
+  nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  @media (max-width: 600px) {
+    .container {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .tagline {
+      margin-left: 0;
+    }
+
+    nav {
+      margin-left: 0;
+      margin-top: 0.5rem;
+      width: 100%;
+    }
+  }
+</style> 

@@ -1,0 +1,281 @@
+---
+import LessonLayout from '../../layouts/LessonLayout.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+
+const basicInterfaceExample = `// Basic interface definition
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  isActive: boolean;
+}
+
+// Using the interface
+const newUser: User = {
+  id: 1,
+  name: 'Jane Doe',
+  email: 'jane@example.com',
+  isActive: true
+};
+
+// Error - missing required property
+// const invalidUser: User = {
+//   id: 2,
+//   name: 'John Smith',
+//   isActive: false
+// };`;
+
+const optionalPropertiesExample = `// Interface with optional properties
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  description?: string; // Optional property
+  category?: string;    // Optional property
+}
+
+// Both are valid
+const product1: Product = {
+  id: 101,
+  name: 'TypeScript Course',
+  price: 49.99,
+  description: 'Learn TypeScript from scratch'
+};
+
+const product2: Product = {
+  id: 102,
+  name: 'JavaScript Course',
+  price: 39.99
+  // Optional properties can be omitted
+};`;
+
+const readonlyPropertiesExample = `// Interface with readonly properties
+interface Config {
+  readonly apiKey: string;
+  readonly baseUrl: string;
+  timeout: number; // Not readonly
+}
+
+const appConfig: Config = {
+  apiKey: 'abc123xyz',
+  baseUrl: 'https://api.example.com',
+  timeout: 3000
+};
+
+// This is allowed
+appConfig.timeout = 5000;
+
+// Error: Cannot assign to 'apiKey' because it is a read-only property
+// appConfig.apiKey = 'new-key';`;
+
+const extendingInterfacesExample = `// Extending interfaces
+interface Person {
+  name: string;
+  age: number;
+}
+
+interface Employee extends Person {
+  employeeId: number;
+  department: string;
+}
+
+// Must include all properties from Person and Employee
+const employee: Employee = {
+  name: 'Alice Johnson',
+  age: 28,
+  employeeId: 12345,
+  department: 'Engineering'
+};
+
+// Multiple inheritance
+interface Manager extends Employee {
+  managerLevel: number;
+  directReports: Employee[];
+}`;
+
+const indexSignatureExample = `// Interface with index signature
+interface Dictionary {
+  [key: string]: string;
+}
+
+const colors: Dictionary = {
+  red: '#FF0000',
+  green: '#00FF00',
+  blue: '#0000FF'
+};
+
+// Any string key is allowed
+colors.purple = '#800080';
+
+// Mixed property types with index signatures
+interface UserRoles {
+  userId: number;      // Regular property
+  admin: boolean;      // Regular property
+  [role: string]: any; // Index signature
+}
+
+const userRoles: UserRoles = {
+  userId: 1,
+  admin: true,
+  editor: true,
+  viewer: true
+};`;
+
+const functionsExample = `// Interface for function types
+interface MathOperation {
+  (x: number, y: number): number;
+}
+
+// Function that implements the interface
+const add: MathOperation = function(a, b) {
+  return a + b;
+};
+
+const subtract: MathOperation = function(a, b) {
+  return a - b;
+};
+
+// Interface with methods
+interface Calculator {
+  add(x: number, y: number): number;
+  subtract(x: number, y: number): number;
+}
+
+// Object implementing the interface
+const basicCalculator: Calculator = {
+  add(x, y) {
+    return x + y;
+  },
+  subtract(x, y) {
+    return x - y;
+  }
+};`;
+---
+
+<LessonLayout title="Interfaces" number={3}>
+  <p>
+    Interfaces are one of TypeScript's most powerful features for defining object shapes and contracts.
+    They allow you to create reusable, named types that define the structure of objects.
+  </p>
+
+  <h2>Basic Interface Syntax</h2>
+  
+  <p>
+    An interface defines the shape of an object by listing its required properties and their types.
+  </p>
+
+  <CodeBlock code={basicInterfaceExample} title="Basic Interface Definition" />
+
+  <h2>Optional Properties</h2>
+  
+  <p>
+    Interfaces can include optional properties using the question mark (<code>?</code>) symbol. 
+    These properties can be omitted when creating objects of that type.
+  </p>
+
+  <CodeBlock code={optionalPropertiesExample} title="Interfaces with Optional Properties" />
+
+  <h2>Readonly Properties</h2>
+  
+  <p>
+    You can mark interface properties as readonly to prevent them from being changed after
+    the object is created.
+  </p>
+
+  <CodeBlock code={readonlyPropertiesExample} title="Interfaces with Readonly Properties" />
+
+  <h2>Extending Interfaces</h2>
+  
+  <p>
+    Interfaces can extend other interfaces, inheriting their properties and adding new ones.
+    This allows for composition and reuse of interface definitions.
+  </p>
+
+  <CodeBlock code={extendingInterfacesExample} title="Extending Interfaces" />
+
+  <h2>Index Signatures</h2>
+  
+  <p>
+    Interfaces can define index signatures that allow additional properties with consistent types.
+  </p>
+
+  <CodeBlock code={indexSignatureExample} title="Interfaces with Index Signatures" />
+
+  <h2>Function Types and Methods</h2>
+  
+  <p>
+    Interfaces can describe function types and methods, making them useful for defining callbacks,
+    event handlers, and object methods.
+  </p>
+
+  <CodeBlock code={functionsExample} title="Interfaces for Functions and Methods" />
+
+  <div class="info-box">
+    <h3>Interface vs. Type Alias</h3>
+    <p>
+      TypeScript offers both interfaces and type aliases. The key differences: interfaces can be extended
+      later with more properties, while type aliases are fixed once defined. Interfaces are often preferred
+      for public API definitions as they can be augmented by consumers.
+    </p>
+  </div>
+  
+  <div class="info-box">
+    <h3>Key Takeaway</h3>
+    <p>
+      Interfaces help create consistent structure across your codebase. They enable better code completion,
+      error detection, and documentation, especially in larger projects with multiple developers.
+    </p>
+  </div>
+</LessonLayout>
+
+<style>
+  h2 {
+    margin-top: 2rem;
+    font-size: 1.5rem;
+  }
+  
+  h3 {
+    margin-top: 1.5rem;
+    font-size: 1.2rem;
+  }
+  
+  p {
+    margin: 1rem 0;
+    line-height: 1.6;
+  }
+  
+  ul {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+  }
+  
+  li {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+  
+  code {
+    font-family: 'JetBrains Mono', 'Fira Code', Menlo, Monaco, 'Courier New', monospace;
+    background-color: #f0f0f0;
+    padding: 0.1rem 0.3rem;
+    border-radius: 3px;
+    font-size: 0.9em;
+  }
+  
+  .info-box {
+    background-color: #EFF6FF;
+    border-left: 4px solid #3178c6;
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 4px 4px 0;
+  }
+  
+  .info-box h3 {
+    margin-top: 0;
+    color: #3178c6;
+  }
+  
+  .info-box p {
+    margin-bottom: 0;
+  }
+</style> 

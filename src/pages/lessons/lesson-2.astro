@@ -1,0 +1,199 @@
+---
+import LessonLayout from '../../layouts/LessonLayout.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+
+const variableExample = `// Type annotations with variables
+let username: string = 'alex123';
+let userId: number = 42;
+let isAdmin: boolean = false;
+let userPreferences: string[] = ['dark_mode', 'notifications_on'];
+let lastLogin: Date = new Date();
+
+// Type annotations with initialization
+let score = 100;            // Type is inferred as number
+let player = 'Player One';  // Type is inferred as string
+let active = true;          // Type is inferred as boolean`;
+
+const objectExample = `// Object type annotations
+let user: {
+  id: number;
+  name: string;
+  email: string;
+  active?: boolean;  // Optional property (may be undefined)
+} = {
+  id: 1,
+  name: 'Alex',
+  email: 'alex@example.com'
+  // active is optional, so we can omit it
+};
+
+// Nested object type annotations
+let product: {
+  id: number;
+  name: string;
+  price: number;
+  category: {
+    id: number;
+    name: string;
+  }
+} = {
+  id: 101,
+  name: 'TypeScript Course',
+  price: 49.99,
+  category: {
+    id: 3,
+    name: 'Programming'
+  }
+};`;
+
+const functionExample = `// Function parameter and return type annotations
+function calculateTotal(price: number, quantity: number): number {
+  return price * quantity;
+}
+
+// Optional parameters (use ? after parameter name)
+function greetUser(name: string, title?: string): string {
+  if (title) {
+    return \`Hello, \${title} \${name}!\`;
+  }
+  return \`Hello, \${name}!\`;
+}
+
+// Default parameters (provide default value)
+function createUser(
+  name: string, 
+  age: number = 30, 
+  isActive: boolean = true
+): { name: string; age: number; isActive: boolean } {
+  return { name, age, isActive };
+}
+
+// Rest parameters with type annotations
+function sum(...numbers: number[]): number {
+  return numbers.reduce((total, num) => total + num, 0);
+}`;
+
+const unionExample = `// Union type (can be one of several types)
+let userId: string | number;
+userId = 123;      // Valid
+userId = 'ABC123'; // Also valid
+// userId = true;  // Error: Type 'boolean' is not assignable to type 'string | number'
+
+// Function with union types
+function displayId(id: string | number): void {
+  console.log(\`ID: \${id}\`);
+}
+
+// Type narrowing with union types
+function formatId(id: string | number): string {
+  if (typeof id === 'string') {
+    // TypeScript knows id is a string in this block
+    return id.toUpperCase();
+  } else {
+    // TypeScript knows id is a number in this block
+    return \`ID-\${id.toString().padStart(5, '0')}\`;
+  }
+}`;
+---
+
+<LessonLayout title="Type Annotations" number={2}>
+  <p>
+    Type annotations are the core feature of TypeScript that allows you to explicitly define
+    the types of variables, function parameters, return values, and more.
+  </p>
+
+  <h2>Basic Type Annotations</h2>
+  
+  <p>
+    Type annotations use a simple syntax: a colon followed by the type name after the variable,
+    parameter, or function name.
+  </p>
+
+  <CodeBlock code={variableExample} title="Variable Type Annotations" />
+
+  <div class="info-box">
+    <h3>Type Inference</h3>
+    <p>
+      TypeScript can often infer types automatically when you initialize variables.
+      Explicit type annotations are not always necessary but can improve code readability
+      and catch errors when variable initialization happens elsewhere.
+    </p>
+  </div>
+
+  <h2>Object Type Annotations</h2>
+  
+  <p>
+    TypeScript allows you to define the shape of objects with detailed property types.
+  </p>
+
+  <CodeBlock code={objectExample} title="Object Type Annotations" />
+
+  <h2>Function Type Annotations</h2>
+  
+  <p>
+    Functions can have type annotations for parameters and return values.
+  </p>
+
+  <CodeBlock code={functionExample} title="Function Type Annotations" />
+
+  <h2>Union Types</h2>
+  
+  <p>
+    Sometimes a value could be one of several types. TypeScript allows you to use union types to represent these cases.
+  </p>
+
+  <CodeBlock code={unionExample} title="Union Types" />
+
+  <div class="info-box">
+    <h3>Key Takeaway</h3>
+    <p>
+      Type annotations help catch errors during development rather than runtime.
+      They act as living documentation that helps you and your team understand
+      how different parts of your code should be used.
+    </p>
+  </div>
+</LessonLayout>
+
+<style>
+  h2 {
+    margin-top: 2rem;
+    font-size: 1.5rem;
+  }
+  
+  h3 {
+    margin-top: 1.5rem;
+    font-size: 1.2rem;
+  }
+  
+  p {
+    margin: 1rem 0;
+    line-height: 1.6;
+  }
+  
+  ul {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+  }
+  
+  li {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+  
+  .info-box {
+    background-color: #EFF6FF;
+    border-left: 4px solid #3178c6;
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 4px 4px 0;
+  }
+  
+  .info-box h3 {
+    margin-top: 0;
+    color: #3178c6;
+  }
+  
+  .info-box p {
+    margin-bottom: 0;
+  }
+</style> 

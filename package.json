@@ -1,0 +1,17 @@
+{
+  "name": "javascript-to-typescript-course-app",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "A learning app to help JavaScript developers quickly learn TypeScript",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^5.6.1"
+  },
+  "author": "",
+  "license": "MIT"
+}

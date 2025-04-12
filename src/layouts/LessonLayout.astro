@@ -1,0 +1,95 @@
+---
+import Layout from './Layout.astro';
+import Header from '../components/Header.astro';
+
+interface Props {
+  title: string;
+  number: number;
+}
+
+const { title, number } = Astro.props;
+---
+
+<Layout>
+  <Header />
+  
+  <main class="container">
+    <div class="lesson-header">
+      <div class="lesson-number">Lesson {number}</div>
+      <h1>{title}</h1>
+    </div>
+    
+    <div class="lesson-content">
+      <slot />
+    </div>
+    
+    <div class="navigation">
+      {number > 1 && (
+        <a href={`/lessons/lesson-${number-1}`} class="prev-link">
+          ← Previous Lesson
+        </a>
+      )}
+      
+      {number < 10 && (
+        <a href={`/lessons/lesson-${number+1}`} class="next-link">
+          Next Lesson →
+        </a>
+      )}
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+  
+  .lesson-header {
+    margin-bottom: 2rem;
+  }
+  
+  .lesson-number {
+    color: #3178c6;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  
+  h1 {
+    font-size: 2rem;
+    margin: 0;
+  }
+  
+  .lesson-content {
+    line-height: 1.6;
+  }
+  
+  .navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e5e7eb;
+  }
+  
+  .prev-link, .next-link {
+    color: #3178c6;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+  }
+  
+  .prev-link:hover, .next-link:hover {
+    background-color: rgba(49, 120, 198, 0.1);
+  }
+  
+  .prev-link {
+    margin-right: auto;
+  }
+  
+  .next-link {
+    margin-left: auto;
+  }
+</style> 
