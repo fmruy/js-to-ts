@@ -2,98 +2,13 @@
 import LessonLayout from '../../layouts/LessonLayout.astro';
 import CodeBlock from '../../components/CodeBlock.astro';
 
-const variableExample = `// Type annotations with variables
-let username: string = 'alex123';
-let userId: number = 42;
-let isAdmin: boolean = false;
-let userPreferences: string[] = ['dark_mode', 'notifications_on'];
-let lastLogin: Date = new Date();
+const variableExample = "// Type annotations with variables\nlet username: string = 'alex123';\nlet userId: number = 42;\nlet isAdmin: boolean = false;\nlet userPreferences: string[] = ['dark_mode', 'notifications_on'];\nlet lastLogin: Date = new Date();\n\n// Type annotations with initialization\nlet score = 100;            // Type is inferred as number\nlet player = 'Player One';  // Type is inferred as string\nlet active = true;          // Type is inferred as boolean";
 
-// Type annotations with initialization
-let score = 100;            // Type is inferred as number
-let player = 'Player One';  // Type is inferred as string
-let active = true;          // Type is inferred as boolean`;
+const objectExample = "// Object type annotations\nlet user: {\n  id: number;\n  name: string;\n  email: string;\n  active?: boolean;  // Optional property (may be undefined)\n} = {\n  id: 1,\n  name: 'Alex',\n  email: 'alex@example.com'\n  // active is optional, so we can omit it\n};\n\n// Nested object type annotations\nlet product: {\n  id: number;\n  name: string;\n  price: number;\n  category: {\n    id: number;\n    name: string;\n  }\n} = {\n  id: 101,\n  name: 'TypeScript Course',\n  price: 49.99,\n  category: {\n    id: 3,\n    name: 'Programming'\n  }\n};";
 
-const objectExample = `// Object type annotations
-let user: {
-  id: number;
-  name: string;
-  email: string;
-  active?: boolean;  // Optional property (may be undefined)
-} = {
-  id: 1,
-  name: 'Alex',
-  email: 'alex@example.com'
-  // active is optional, so we can omit it
-};
+const functionExample = "// Function parameter and return type annotations\nfunction calculateTotal(price: number, quantity: number): number {\n  return price * quantity;\n}\n\n// Optional parameters (use ? after parameter name)\nfunction greetUser(name: string, title?: string): string {\n  if (title) {\n    return `Hello, ${title} ${name}!`;\n  }\n  return `Hello, ${name}!`;\n}\n\n// Default parameters (provide default value)\nfunction createUser(\n  name: string, \n  age: number = 30, \n  isActive: boolean = true\n): { name: string; age: number; isActive: boolean } {\n  return { name, age, isActive };\n}\n\n// Rest parameters with type annotations\nfunction sum(...numbers: number[]): number {\n  return numbers.reduce((total, num) => total + num, 0);\n}";
 
-// Nested object type annotations
-let product: {
-  id: number;
-  name: string;
-  price: number;
-  category: {
-    id: number;
-    name: string;
-  }
-} = {
-  id: 101,
-  name: 'TypeScript Course',
-  price: 49.99,
-  category: {
-    id: 3,
-    name: 'Programming'
-  }
-};`;
-
-const functionExample = `// Function parameter and return type annotations
-function calculateTotal(price: number, quantity: number): number {
-  return price * quantity;
-}
-
-// Optional parameters (use ? after parameter name)
-function greetUser(name: string, title?: string): string {
-  if (title) {
-    return \`Hello, \${title} \${name}!\`;
-  }
-  return \`Hello, \${name}!\`;
-}
-
-// Default parameters (provide default value)
-function createUser(
-  name: string, 
-  age: number = 30, 
-  isActive: boolean = true
-): { name: string; age: number; isActive: boolean } {
-  return { name, age, isActive };
-}
-
-// Rest parameters with type annotations
-function sum(...numbers: number[]): number {
-  return numbers.reduce((total, num) => total + num, 0);
-}`;
-
-const unionExample = `// Union type (can be one of several types)
-let userId: string | number;
-userId = 123;      // Valid
-userId = 'ABC123'; // Also valid
-// userId = true;  // Error: Type 'boolean' is not assignable to type 'string | number'
-
-// Function with union types
-function displayId(id: string | number): void {
-  console.log(\`ID: \${id}\`);
-}
-
-// Type narrowing with union types
-function formatId(id: string | number): string {
-  if (typeof id === 'string') {
-    // TypeScript knows id is a string in this block
-    return id.toUpperCase();
-  } else {
-    // TypeScript knows id is a number in this block
-    return \`ID-\${id.toString().padStart(5, '0')}\`;
-  }
-}`;
+const unionExample = "// Union type (can be one of several types)\nlet userId: string | number;\nuserId = 123;      // Valid\nuserId = 'ABC123'; // Also valid\n// userId = true;  // Error: Type 'boolean' is not assignable to type 'string | number'\n\n// Function with union types\nfunction displayId(id: string | number): void {\n  console.log(`ID: ${id}`);\n}\n\n// Type narrowing with union types\nfunction formatId(id: string | number): string {\n  if (typeof id === 'string') {\n    // TypeScript knows id is a string in this block\n    return id.toUpperCase();\n  } else {\n    // TypeScript knows id is a number in this block\n    return `ID-${id.toString().padStart(5, '0')}`;\n  }\n}";
 ---
 
 <LessonLayout title="Type Annotations" number={2}>

@@ -2,154 +2,17 @@
 import LessonLayout from '../../layouts/LessonLayout.astro';
 import CodeBlock from '../../components/CodeBlock.astro';
 
-const basicInterfaceExample = `// Basic interface definition
-interface User {
-  id: number;
-  name: string;
-  email: string;
-  isActive: boolean;
-}
+const basicInterfaceExample = "// Basic interface definition\ninterface User {\n  id: number;\n  name: string;\n  email: string;\n  isActive: boolean;\n}\n\n// Using the interface\nconst newUser: User = {\n  id: 1,\n  name: 'Jane Doe',\n  email: 'jane@example.com',\n  isActive: true\n};\n\n// Error - missing required property\n// const invalidUser: User = {\n//   id: 2,\n//   name: 'John Smith',\n//   isActive: false\n// };";
 
-// Using the interface
-const newUser: User = {
-  id: 1,
-  name: 'Jane Doe',
-  email: 'jane@example.com',
-  isActive: true
-};
+const optionalPropertiesExample = "// Interface with optional properties\ninterface Product {\n  id: number;\n  name: string;\n  price: number;\n  description?: string; // Optional property\n  category?: string;    // Optional property\n}\n\n// Both are valid\nconst product1: Product = {\n  id: 101,\n  name: 'TypeScript Course',\n  price: 49.99,\n  description: 'Learn TypeScript from scratch'\n};\n\nconst product2: Product = {\n  id: 102,\n  name: 'JavaScript Course',\n  price: 39.99\n  // Optional properties can be omitted\n};";
 
-// Error - missing required property
-// const invalidUser: User = {
-//   id: 2,
-//   name: 'John Smith',
-//   isActive: false
-// };`;
+const readonlyPropertiesExample = "// Interface with readonly properties\ninterface Config {\n  readonly apiKey: string;\n  readonly baseUrl: string;\n  timeout: number; // Not readonly\n}\n\nconst appConfig: Config = {\n  apiKey: 'abc123xyz',\n  baseUrl: 'https://api.example.com',\n  timeout: 3000\n};\n\n// This is allowed\nappConfig.timeout = 5000;\n\n// Error: Cannot assign to 'apiKey' because it is a read-only property\n// appConfig.apiKey = 'new-key';";
 
-const optionalPropertiesExample = `// Interface with optional properties
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  description?: string; // Optional property
-  category?: string;    // Optional property
-}
+const extendingInterfacesExample = "// Extending interfaces\ninterface Person {\n  name: string;\n  age: number;\n}\n\ninterface Employee extends Person {\n  employeeId: number;\n  department: string;\n}\n\n// Must include all properties from Person and Employee\nconst employee: Employee = {\n  name: 'Alice Johnson',\n  age: 28,\n  employeeId: 12345,\n  department: 'Engineering'\n};\n\n// Multiple inheritance\ninterface Manager extends Employee {\n  managerLevel: number;\n  directReports: Employee[];\n}";
 
-// Both are valid
-const product1: Product = {
-  id: 101,
-  name: 'TypeScript Course',
-  price: 49.99,
-  description: 'Learn TypeScript from scratch'
-};
+const indexSignatureExample = "// Interface with index signature\ninterface Dictionary {\n  [key: string]: string;\n}\n\nconst colors: Dictionary = {\n  red: '#FF0000',\n  green: '#00FF00',\n  blue: '#0000FF'\n};\n\n// Any string key is allowed\ncolors.purple = '#800080';\n\n// Mixed property types with index signatures\ninterface UserRoles {\n  userId: number;      // Regular property\n  admin: boolean;      // Regular property\n  [role: string]: any; // Index signature\n}\n\nconst userRoles: UserRoles = {\n  userId: 1,\n  admin: true,\n  editor: true,\n  viewer: true\n};";
 
-const product2: Product = {
-  id: 102,
-  name: 'JavaScript Course',
-  price: 39.99
-  // Optional properties can be omitted
-};`;
-
-const readonlyPropertiesExample = `// Interface with readonly properties
-interface Config {
-  readonly apiKey: string;
-  readonly baseUrl: string;
-  timeout: number; // Not readonly
-}
-
-const appConfig: Config = {
-  apiKey: 'abc123xyz',
-  baseUrl: 'https://api.example.com',
-  timeout: 3000
-};
-
-// This is allowed
-appConfig.timeout = 5000;
-
-// Error: Cannot assign to 'apiKey' because it is a read-only property
-// appConfig.apiKey = 'new-key';`;
-
-const extendingInterfacesExample = `// Extending interfaces
-interface Person {
-  name: string;
-  age: number;
-}
-
-interface Employee extends Person {
-  employeeId: number;
-  department: string;
-}
-
-// Must include all properties from Person and Employee
-const employee: Employee = {
-  name: 'Alice Johnson',
-  age: 28,
-  employeeId: 12345,
-  department: 'Engineering'
-};
-
-// Multiple inheritance
-interface Manager extends Employee {
-  managerLevel: number;
-  directReports: Employee[];
-}`;
-
-const indexSignatureExample = `// Interface with index signature
-interface Dictionary {
-  [key: string]: string;
-}
-
-const colors: Dictionary = {
-  red: '#FF0000',
-  green: '#00FF00',
-  blue: '#0000FF'
-};
-
-// Any string key is allowed
-colors.purple = '#800080';
-
-// Mixed property types with index signatures
-interface UserRoles {
-  userId: number;      // Regular property
-  admin: boolean;      // Regular property
-  [role: string]: any; // Index signature
-}
-
-const userRoles: UserRoles = {
-  userId: 1,
-  admin: true,
-  editor: true,
-  viewer: true
-};`;
-
-const functionsExample = `// Interface for function types
-interface MathOperation {
-  (x: number, y: number): number;
-}
-
-// Function that implements the interface
-const add: MathOperation = function(a, b) {
-  return a + b;
-};
-
-const subtract: MathOperation = function(a, b) {
-  return a - b;
-};
-
-// Interface with methods
-interface Calculator {
-  add(x: number, y: number): number;
-  subtract(x: number, y: number): number;
-}
-
-// Object implementing the interface
-const basicCalculator: Calculator = {
-  add(x, y) {
-    return x + y;
-  },
-  subtract(x, y) {
-    return x - y;
-  }
-};`;
+const functionsExample = "// Interface for function types\ninterface MathOperation {\n  (x: number, y: number): number;\n}\n\n// Function that implements the interface\nconst add: MathOperation = function(a, b) {\n  return a + b;\n};\n\nconst subtract: MathOperation = function(a, b) {\n  return a - b;\n};\n\n// Interface with methods\ninterface Calculator {\n  add(x: number, y: number): number;\n  subtract(x: number, y: number): number;\n}\n\n// Object implementing the interface\nconst basicCalculator: Calculator = {\n  add(x, y) {\n    return x + y;\n  },\n  subtract(x, y) {\n    return x - y;\n  }\n};";
 ---
 
 <LessonLayout title="Interfaces" number={3}>
