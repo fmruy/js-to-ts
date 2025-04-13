@@ -1,96 +1,89 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import LessonCard from '../components/LessonCard.astro';
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import LessonCard from "../components/LessonCard.astro";
 
 const lessons = [
   {
     number: 1,
     title: "TypeScript Basics",
     description: "Understanding basic TypeScript types and syntax differences from JavaScript",
-    slug: "lesson-1"
+    slug: "lesson-1",
   },
   {
     number: 2,
     title: "Type Annotations",
     description: "How to add type annotations to variables, functions, and objects",
-    slug: "lesson-2"
+    slug: "lesson-2",
   },
   {
     number: 3,
     title: "Interfaces",
     description: "Using interfaces to define object shapes and custom types",
-    slug: "lesson-3"
+    slug: "lesson-3",
   },
   {
     number: 4,
     title: "Classes in TypeScript",
     description: "Understanding classes with TypeScript's added type features",
-    slug: "lesson-4"
+    slug: "lesson-4",
   },
   {
     number: 5,
     title: "Functions & Type Signatures",
     description: "Adding type signatures to functions and understanding function types",
-    slug: "lesson-5"
+    slug: "lesson-5",
   },
   {
     number: 6,
     title: "Generics",
     description: "Creating reusable components with generics for type flexibility",
-    slug: "lesson-6"
+    slug: "lesson-6",
   },
   {
     number: 7,
     title: "Type Utilities",
     description: "Using built-in type utilities like Partial, Pick, and Omit",
-    slug: "lesson-7"
+    slug: "lesson-7",
   },
   {
     number: 8,
     title: "Converting JS Projects",
     description: "Practical steps to migrate JavaScript projects to TypeScript",
-    slug: "lesson-8"
+    slug: "lesson-8",
   },
   {
     number: 9,
     title: "Advanced Types",
     description: "Union types, intersection types, and type narrowing techniques",
-    slug: "lesson-9"
+    slug: "lesson-9",
   },
   {
     number: 10,
     title: "Real-world TypeScript",
     description: "Best practices for using TypeScript in production applications",
-    slug: "lesson-10"
-  }
-]
+    slug: "lesson-10",
+  },
+];
 ---
 
 <Layout>
   <Header />
-  
+
   <main class="container">
     <section class="hero">
       <h1>JavaScript to TypeScript</h1>
       <p class="subtitle">A quick guide for experienced JavaScript developers</p>
       <p class="description">
-        Learn TypeScript efficiently with 10 practical lessons designed to get you productive quickly.
-        Each lesson builds on your existing JavaScript knowledge to help you master TypeScript.
+        Learn TypeScript efficiently with 10 practical lessons designed to get you productive quickly. Each lesson builds on your existing JavaScript knowledge to help you master
+        TypeScript.
       </p>
     </section>
-    
+
     <section class="lessons">
       <h2>Lessons</h2>
       <div class="lessons-grid">
-        {lessons.map(lesson => (
-          <LessonCard 
-            number={lesson.number}
-            title={lesson.title}
-            description={lesson.description}
-            slug={lesson.slug}
-          />
-        ))}
+        {lessons.map((lesson) => <LessonCard number={lesson.number} title={lesson.title} description={lesson.description} slug={lesson.slug} />)}
       </div>
     </section>
   </main>
@@ -102,45 +95,45 @@ const lessons = [
     margin: 0 auto;
     padding: 2rem 1rem;
   }
-  
+
   .hero {
     text-align: center;
     margin-bottom: 3rem;
     padding-bottom: 2rem;
     border-bottom: 1px solid #e5e7eb;
   }
-  
+
   h1 {
     font-size: 2.5rem;
     margin: 0;
     color: #111827;
   }
-  
+
   .subtitle {
     font-size: 1.25rem;
     color: #6b7280;
     margin: 0.5rem 0 1.5rem;
   }
-  
+
   .description {
     max-width: 700px;
     margin: 0 auto;
     line-height: 1.6;
     color: #374151;
   }
-  
+
   h2 {
     font-size: 1.8rem;
     margin-bottom: 1.5rem;
     color: #111827;
   }
-  
+
   .lessons-grid {
     display: grid;
     gap: 1rem;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   }
-  
+
   @media (max-width: 640px) {
     .lessons-grid {
       grid-template-columns: 1fr;

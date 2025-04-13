@@ -1,92 +1,83 @@
 ---
-import LessonLayout from '../../layouts/LessonLayout.astro';
-import CodeBlock from '../../components/CodeBlock.astro';
+import LessonLayout from "../../layouts/LessonLayout.astro";
+import CodeBlock from "../../components/CodeBlock.astro";
 
-const basicInterfaceExample = "// Basic interface definition\ninterface User {\n  id: number;\n  name: string;\n  email: string;\n  isActive: boolean;\n}\n\n// Using the interface\nconst newUser: User = {\n  id: 1,\n  name: 'Jane Doe',\n  email: 'jane@example.com',\n  isActive: true\n};\n\n// Error - missing required property\n// const invalidUser: User = {\n//   id: 2,\n//   name: 'John Smith',\n//   isActive: false\n// };";
+const basicInterfaceExample =
+  "// Basic interface definition\ninterface User {\n  id: number;\n  name: string;\n  email: string;\n  isActive: boolean;\n}\n\n// Using the interface\nconst newUser: User = {\n  id: 1,\n  name: 'Jane Doe',\n  email: 'jane@example.com',\n  isActive: true\n};\n\n// Error - missing required property\n// const invalidUser: User = {\n//   id: 2,\n//   name: 'John Smith',\n//   isActive: false\n// };";
 
-const optionalPropertiesExample = "// Interface with optional properties\ninterface Product {\n  id: number;\n  name: string;\n  price: number;\n  description?: string; // Optional property\n  category?: string;    // Optional property\n}\n\n// Both are valid\nconst product1: Product = {\n  id: 101,\n  name: 'TypeScript Course',\n  price: 49.99,\n  description: 'Learn TypeScript from scratch'\n};\n\nconst product2: Product = {\n  id: 102,\n  name: 'JavaScript Course',\n  price: 39.99\n  // Optional properties can be omitted\n};";
+const optionalPropertiesExample =
+  "// Interface with optional properties\ninterface Product {\n  id: number;\n  name: string;\n  price: number;\n  description?: string; // Optional property\n  category?: string;    // Optional property\n}\n\n// Both are valid\nconst product1: Product = {\n  id: 101,\n  name: 'TypeScript Course',\n  price: 49.99,\n  description: 'Learn TypeScript from scratch'\n};\n\nconst product2: Product = {\n  id: 102,\n  name: 'JavaScript Course',\n  price: 39.99\n  // Optional properties can be omitted\n};";
 
-const readonlyPropertiesExample = "// Interface with readonly properties\ninterface Config {\n  readonly apiKey: string;\n  readonly baseUrl: string;\n  timeout: number; // Not readonly\n}\n\nconst appConfig: Config = {\n  apiKey: 'abc123xyz',\n  baseUrl: 'https://api.example.com',\n  timeout: 3000\n};\n\n// This is allowed\nappConfig.timeout = 5000;\n\n// Error: Cannot assign to 'apiKey' because it is a read-only property\n// appConfig.apiKey = 'new-key';";
+const readonlyPropertiesExample =
+  "// Interface with readonly properties\ninterface Config {\n  readonly apiKey: string;\n  readonly baseUrl: string;\n  timeout: number; // Not readonly\n}\n\nconst appConfig: Config = {\n  apiKey: 'abc123xyz',\n  baseUrl: 'https://api.example.com',\n  timeout: 3000\n};\n\n// This is allowed\nappConfig.timeout = 5000;\n\n// Error: Cannot assign to 'apiKey' because it is a read-only property\n// appConfig.apiKey = 'new-key';";
 
-const extendingInterfacesExample = "// Extending interfaces\ninterface Person {\n  name: string;\n  age: number;\n}\n\ninterface Employee extends Person {\n  employeeId: number;\n  department: string;\n}\n\n// Must include all properties from Person and Employee\nconst employee: Employee = {\n  name: 'Alice Johnson',\n  age: 28,\n  employeeId: 12345,\n  department: 'Engineering'\n};\n\n// Multiple inheritance\ninterface Manager extends Employee {\n  managerLevel: number;\n  directReports: Employee[];\n}";
+const extendingInterfacesExample =
+  "// Extending interfaces\ninterface Person {\n  name: string;\n  age: number;\n}\n\ninterface Employee extends Person {\n  employeeId: number;\n  department: string;\n}\n\n// Must include all properties from Person and Employee\nconst employee: Employee = {\n  name: 'Alice Johnson',\n  age: 28,\n  employeeId: 12345,\n  department: 'Engineering'\n};\n\n// Multiple inheritance\ninterface Manager extends Employee {\n  managerLevel: number;\n  directReports: Employee[];\n}";
 
-const indexSignatureExample = "// Interface with index signature\ninterface Dictionary {\n  [key: string]: string;\n}\n\nconst colors: Dictionary = {\n  red: '#FF0000',\n  green: '#00FF00',\n  blue: '#0000FF'\n};\n\n// Any string key is allowed\ncolors.purple = '#800080';\n\n// Mixed property types with index signatures\ninterface UserRoles {\n  userId: number;      // Regular property\n  admin: boolean;      // Regular property\n  [role: string]: any; // Index signature\n}\n\nconst userRoles: UserRoles = {\n  userId: 1,\n  admin: true,\n  editor: true,\n  viewer: true\n};";
+const indexSignatureExample =
+  "// Interface with index signature\ninterface Dictionary {\n  [key: string]: string;\n}\n\nconst colors: Dictionary = {\n  red: '#FF0000',\n  green: '#00FF00',\n  blue: '#0000FF'\n};\n\n// Any string key is allowed\ncolors.purple = '#800080';\n\n// Mixed property types with index signatures\ninterface UserRoles {\n  userId: number;      // Regular property\n  admin: boolean;      // Regular property\n  [role: string]: any; // Index signature\n}\n\nconst userRoles: UserRoles = {\n  userId: 1,\n  admin: true,\n  editor: true,\n  viewer: true\n};";
 
-const functionsExample = "// Interface for function types\ninterface MathOperation {\n  (x: number, y: number): number;\n}\n\n// Function that implements the interface\nconst add: MathOperation = function(a, b) {\n  return a + b;\n};\n\nconst subtract: MathOperation = function(a, b) {\n  return a - b;\n};\n\n// Interface with methods\ninterface Calculator {\n  add(x: number, y: number): number;\n  subtract(x: number, y: number): number;\n}\n\n// Object implementing the interface\nconst basicCalculator: Calculator = {\n  add(x, y) {\n    return x + y;\n  },\n  subtract(x, y) {\n    return x - y;\n  }\n};";
+const functionsExample =
+  "// Interface for function types\ninterface MathOperation {\n  (x: number, y: number): number;\n}\n\n// Function that implements the interface\nconst add: MathOperation = function(a, b) {\n  return a + b;\n};\n\nconst subtract: MathOperation = function(a, b) {\n  return a - b;\n};\n\n// Interface with methods\ninterface Calculator {\n  add(x: number, y: number): number;\n  subtract(x: number, y: number): number;\n}\n\n// Object implementing the interface\nconst basicCalculator: Calculator = {\n  add(x, y) {\n    return x + y;\n  },\n  subtract(x, y) {\n    return x - y;\n  }\n};";
 ---
 
 <LessonLayout title="Interfaces" number={3}>
   <p>
-    Interfaces are one of TypeScript's most powerful features for defining object shapes and contracts.
-    They allow you to create reusable, named types that define the structure of objects.
+    Interfaces are one of TypeScript's most powerful features for defining object shapes and contracts. They allow you to create reusable, named types that define the structure of
+    objects.
   </p>
 
   <h2>Basic Interface Syntax</h2>
-  
-  <p>
-    An interface defines the shape of an object by listing its required properties and their types.
-  </p>
+
+  <p>An interface defines the shape of an object by listing its required properties and their types.</p>
 
   <CodeBlock code={basicInterfaceExample} title="Basic Interface Definition" />
 
   <h2>Optional Properties</h2>
-  
+
   <p>
-    Interfaces can include optional properties using the question mark (<code>?</code>) symbol. 
-    These properties can be omitted when creating objects of that type.
+    Interfaces can include optional properties using the question mark (<code>?</code>) symbol. These properties can be omitted when creating objects of that type.
   </p>
 
   <CodeBlock code={optionalPropertiesExample} title="Interfaces with Optional Properties" />
 
   <h2>Readonly Properties</h2>
-  
-  <p>
-    You can mark interface properties as readonly to prevent them from being changed after
-    the object is created.
-  </p>
+
+  <p>You can mark interface properties as readonly to prevent them from being changed after the object is created.</p>
 
   <CodeBlock code={readonlyPropertiesExample} title="Interfaces with Readonly Properties" />
 
   <h2>Extending Interfaces</h2>
-  
-  <p>
-    Interfaces can extend other interfaces, inheriting their properties and adding new ones.
-    This allows for composition and reuse of interface definitions.
-  </p>
+
+  <p>Interfaces can extend other interfaces, inheriting their properties and adding new ones. This allows for composition and reuse of interface definitions.</p>
 
   <CodeBlock code={extendingInterfacesExample} title="Extending Interfaces" />
 
   <h2>Index Signatures</h2>
-  
-  <p>
-    Interfaces can define index signatures that allow additional properties with consistent types.
-  </p>
+
+  <p>Interfaces can define index signatures that allow additional properties with consistent types.</p>
 
   <CodeBlock code={indexSignatureExample} title="Interfaces with Index Signatures" />
 
   <h2>Function Types and Methods</h2>
-  
-  <p>
-    Interfaces can describe function types and methods, making them useful for defining callbacks,
-    event handlers, and object methods.
-  </p>
+
+  <p>Interfaces can describe function types and methods, making them useful for defining callbacks, event handlers, and object methods.</p>
 
   <CodeBlock code={functionsExample} title="Interfaces for Functions and Methods" />
 
   <div class="info-box">
     <h3>Interface vs. Type Alias</h3>
     <p>
-      TypeScript offers both interfaces and type aliases. The key differences: interfaces can be extended
-      later with more properties, while type aliases are fixed once defined. Interfaces are often preferred
-      for public API definitions as they can be augmented by consumers.
+      TypeScript offers both interfaces and type aliases. The key differences: interfaces can be extended later with more properties, while type aliases are fixed once defined.
+      Interfaces are often preferred for public API definitions as they can be augmented by consumers.
     </p>
   </div>
-  
+
   <div class="info-box">
     <h3>Key Takeaway</h3>
     <p>
-      Interfaces help create consistent structure across your codebase. They enable better code completion,
-      error detection, and documentation, especially in larger projects with multiple developers.
+      Interfaces help create consistent structure across your codebase. They enable better code completion, error detection, and documentation, especially in larger projects with
+      multiple developers.
     </p>
   </div>
 </LessonLayout>
@@ -96,49 +87,50 @@ const functionsExample = "// Interface for function types\ninterface MathOperati
     margin-top: 2rem;
     font-size: 1.5rem;
   }
-  
+
   h3 {
     margin-top: 1.5rem;
     font-size: 1.2rem;
   }
-  
+
   p {
     margin: 1rem 0;
     line-height: 1.6;
   }
-  
+
   ul {
     margin: 1rem 0;
     padding-left: 1.5rem;
   }
-  
+
   li {
     margin-bottom: 0.5rem;
     line-height: 1.5;
   }
-  
+
   code {
-    font-family: 'JetBrains Mono', 'Fira Code', Menlo, Monaco, 'Courier New', monospace;
+    font-family: "JetBrains Mono", "Fira Code", Menlo, Monaco, "Courier New", monospace;
     background-color: #f0f0f0;
     padding: 0.1rem 0.3rem;
     border-radius: 3px;
     font-size: 0.9em;
   }
-  
+
   .info-box {
-    background-color: #EFF6FF;
+    background-color: #eff6ff;
     border-left: 4px solid #3178c6;
     padding: 1rem 1.5rem;
     margin: 1.5rem 0;
     border-radius: 0 4px 4px 0;
   }
-  
+
   .info-box h3 {
     margin-top: 0;
     color: #3178c6;
   }
-  
+
   .info-box p {
     margin-bottom: 0;
   }
-</style> 
+</style>
+
